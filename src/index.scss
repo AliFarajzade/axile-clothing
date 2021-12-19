@@ -1,0 +1,18 @@
+@import './App.scss';
+
+// COMPONENTS
+@import './components/directory-menu/directory-menu.styles.scss';
+@import './components/menu-item/menu-item.styles.scss';
+@import './components/collection-preview/collection-preview.styles.scss';
+@import './components/collection-item/collection-item.styles.scss';
+@import './components/header/header.styles.scss';
+@import './components/sign-in/sign-in.styles.scss';
+@import './components/form-group/form-group.styles.scss';
+@import './components/custom-button/custom-button.styles.scss';
+@import './components/loader/loader.styles.scss';
+@import './components/sign-up/sign-up.styles.scss';
+
+// PAGES
+@import './pages/home/homepage.styles.scss';
+@import './pages/shop/shoppage.styles.scss';
+@import './pages/sign-in-up/sign-in-up.styles.scss';
