@@ -1,10 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+
+import { connect } from 'react-redux';
+
 import { ReactComponent as Logo } from '../../assets/Logo.svg';
 import { auth } from '../../firebase/firebase.utilities';
-import Loader from '../loader/loader.component';
+// import Loader from '../loader/loader.component';
 
-export default function Header({ currentUser, signOut }) {
+function Header({ currentUser }) {
     return (
         <div className="header">
             <Link to="/" className="logo-container">
@@ -20,13 +23,9 @@ export default function Header({ currentUser, signOut }) {
                 </Link>
 
                 {currentUser ? (
-                    currentUser === 'loading' ? (
-                        <Loader />
-                    ) : (
-                        <div onClick={() => auth.signOut()} className="option">
-                            SIGN OUT
-                        </div>
-                    )
+                    <div onClick={() => auth.signOut()} className="option">
+                        SIGN OUT
+                    </div>
                 ) : (
                     <Link className="option" to="/sign">
                         SIGN IN
@@ -36,3 +35,9 @@ export default function Header({ currentUser, signOut }) {
         </div>
     );
 }
+
+const mapStateToProps = state => ({
+    currentUser: state.users.currentUser,
+});
+
+export default connect(mapStateToProps)(Header);

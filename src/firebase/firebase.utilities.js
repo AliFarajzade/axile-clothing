@@ -26,8 +26,6 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
     // Guard Clause
     if (!userAuth) return;
 
-    console.log(userAuth);
-
     const userRef = firestore.doc(`users/${userAuth.uid}`);
     const snapshop = await userRef.get();
 
