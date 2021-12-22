@@ -66,4 +66,8 @@ const mapDispatchToProps = dispatchEvent => ({
     setCurrentUser: userAuth => dispatchEvent(setCurrentUser(userAuth)),
 });
 
-export default connect(null, mapDispatchToProps)(App);
+const mapStateToProps = state => ({
+    currentUser: state.users.currentUser,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
