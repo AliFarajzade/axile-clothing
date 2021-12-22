@@ -1,19 +1,30 @@
 import cartActionTypes from './cart.types';
 
+import { addNewItemToCart } from './cart.utilities';
+
 const INITIAL_STATE = {
     hidden: true,
+    shoppingCartItems: [],
 };
 
-const cartReducer = (currenState = INITIAL_STATE, action) => {
+const cartReducer = (currentState = INITIAL_STATE, action) => {
     switch (action.type) {
         case cartActionTypes.TOGGLE_DROPDOWN_VISIBLITY:
             return {
-                ...currenState,
-                hidden: !currenState.hidden,
+                ...currentState,
+                hidden: !currentState.hidden,
+            };
+        case cartActionTypes.ADD_ITEM:
+            return {
+                ...currentState,
+                shoppingCartItems: addNewItemToCart(
+                    currentState.shoppingCartItems,
+                    action.payload
+                ),
             };
 
         default:
-            return currenState;
+            return currentState;
     }
 };
 

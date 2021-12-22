@@ -10,8 +10,7 @@
     top: 90px;
     right: 40px;
     z-index: 1000;
-
-    transition: all 0.2s ease;
+    animation: DropDown 0.2s ease-out;
 
     .cart-items {
         height: 240px;
@@ -22,5 +21,14 @@
 
     button {
         margin-top: auto !important;
+    }
+}
+
+@keyframes DropDown {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
     }
 }

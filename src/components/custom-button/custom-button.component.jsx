@@ -1,6 +1,7 @@
 import React from 'react';
 
 export default function CustomButton({
+    inverted,
     backgroundColor,
     children,
     ...otherCustomButtonProperties
@@ -10,7 +11,7 @@ export default function CustomButton({
             style={{
                 backgroundColor: backgroundColor,
             }}
-            className="custom-button"
+            className={`custom-button ${inverted}`}
             {...otherCustomButtonProperties}
         >
             {children}

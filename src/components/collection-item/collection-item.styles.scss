@@ -1,5 +1,6 @@
 .collection-item {
     width: 22%;
+    position: relative;
     display: flex;
     flex-direction: column;
     height: 350px;
@@ -12,6 +13,15 @@
         background-position: center;
         margin-bottom: 5px;
         border-radius: 3px;
+    }
+
+    .custom-button {
+        position: absolute;
+        top: 250px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80%;
+        opacity: 0;
     }
 
     .collection-footer {
@@ -28,6 +38,13 @@
 
         .price {
             width: 10%;
+        }
+    }
+
+    &:hover {
+        opacity: 0.9;
+        .custom-button {
+            opacity: 1;
         }
     }
 }
