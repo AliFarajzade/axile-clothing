@@ -1,18 +1,41 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
-function CheckoutItem({ imageUrl, name, price, quantity }) {
+import { decreaseItem, addItem } from '../../redux/cart/cart.actions';
+
+function CheckoutItem({ removeItemFunction, item, decreaseItem, addItem }) {
+    const { imageUrl, name, price, quantity } = item;
     return (
         <div className="checkout-item">
             <div className="image-container">
-                <img src={imageUrl} alt={`${name} Image`} />
+                <img src={imageUrl} alt={`${name}`} />
             </div>
 
             <span className="name">{name}</span>
-            <span className="quantity">{quantity}</span>
+            <span className="quantity">
+                <div onClick={() => decreaseItem(item)} className="arrow">
+                    &#10094;
+                </div>
+                <span className="value">{quantity}</span>
+                <div onClick={() => addItem(item)} className="arrow">
+                    &#10095;
+                </div>
+            </span>
             <span className="price">${price}</span>
-            <span className="remove-button">&#10006;</span>
+            <span
+                onClick={() => removeItemFunction(item)}
+                className="remove-button"
+                title="Remove item from cart"
+            >
+                &#10006;
+            </span>
         </div>
     );
 }
 
-export default CheckoutItem;
+const mapDispatchToProps = dispatchEvent => ({
+    decreaseItem: item => dispatchEvent(decreaseItem(item)),
+    addItem: item => dispatchEvent(addItem(item)),
+});
+
+export default connect(null, mapDispatchToProps)(CheckoutItem);

@@ -3,12 +3,14 @@ import { connect } from 'react-redux';
 
 import CheckoutItem from '../../components/checkout-item/checkout-item.component';
 
+import { removeItem } from '../../redux/cart/cart.actions';
+
 import {
     selectCartItems,
     selectCartTotal,
 } from '../../redux/cart/cart.selectors';
 
-function CheckoutPage({ selectCartItems, selectCartTotal }) {
+function CheckoutPage({ selectCartItems, selectCartTotal, removeItem }) {
     console.log('CHECKOUT::::::::', selectCartItems, selectCartTotal);
 
     return (
@@ -30,14 +32,13 @@ function CheckoutPage({ selectCartItems, selectCartTotal }) {
                 <div className="header-block">{/* <span>Action</span> */}</div>
             </div>
 
-            {selectCartItems.map(
-                ({ id, ...otherShoppingCartItemProperties }) => (
-                    <CheckoutItem
-                        key={id}
-                        {...otherShoppingCartItemProperties}
-                    />
-                )
-            )}
+            {selectCartItems.map(item => (
+                <CheckoutItem
+                    key={item.id}
+                    removeItemFunction={removeItem}
+                    item={item}
+                />
+            ))}
 
             <div className="total">
                 <span>TOTAL: ${selectCartTotal}</span>
@@ -51,4 +52,8 @@ const mapStateToProps = state => ({
     selectCartTotal: selectCartTotal(state),
 });
 
-export default connect(mapStateToProps)(CheckoutPage);
+const mapDispatchToProps = dispatchEvent => ({
+    removeItem: item => dispatchEvent(removeItem(item)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(CheckoutPage);

@@ -1,6 +1,6 @@
 import cartActionTypes from './cart.types';
 
-import { addNewItemToCart } from './cart.utilities';
+import { addNewItemToCart, decreaseItemFromCart } from './cart.utilities';
 
 const INITIAL_STATE = {
     hidden: true,
@@ -23,6 +23,21 @@ const cartReducer = (currentState = INITIAL_STATE, action) => {
                 ),
             };
 
+        case cartActionTypes.REMOVE_ITEM:
+            return {
+                ...currentState,
+                shoppingCartItems: currentState.shoppingCartItems.filter(
+                    itemObj => itemObj.id !== action.payload.id
+                ),
+            };
+        case cartActionTypes.DECREASE_ITEM:
+            return {
+                ...currentState,
+                shoppingCartItems: decreaseItemFromCart(
+                    currentState.shoppingCartItems,
+                    action.payload
+                ),
+            };
         default:
             return currentState;
     }

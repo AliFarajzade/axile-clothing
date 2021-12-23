@@ -19,3 +19,21 @@ export const addNewItemToCart = (currentShoppingCart, newCartItem) => {
         ];
     }
 };
+
+export const decreaseItemFromCart = (currentShoppingCart, itemToRemove) => {
+    const existingItemToRemove = currentShoppingCart.find(
+        itemObj => itemObj.id === itemToRemove.id
+    );
+
+    if (existingItemToRemove.quantity === 1) {
+        return currentShoppingCart.filter(
+            itemObj => itemObj.id !== existingItemToRemove.id
+        );
+    }
+
+    return currentShoppingCart.map(itemObj =>
+        itemObj.id === existingItemToRemove.id
+            ? { ...itemObj, quantity: itemObj.quantity - 1 }
+            : itemObj
+    );
+};
