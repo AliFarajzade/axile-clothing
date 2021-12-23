@@ -6,12 +6,17 @@ import { connect } from 'react-redux';
 import { ReactComponent as Logo } from '../../assets/Logo.svg';
 import { auth } from '../../firebase/firebase.utilities';
 
+// import { createStructuredSelector } from 'reselect';
+
+import { selectVisibilityDropDown } from '../../redux/cart/cart.selectors';
+import { selectCurrentUser } from '../../redux/users/users.selectors';
+
 import CartDropDown from '../shop-dropdown/shop-dropdown.component';
 import CartIcon from '../shop-icon/shop-icon.component';
 // import Loader from '../loader/loader.component';
 
-function Header({ currentUser, hidden }) {
-    console.log(hidden);
+function Header({ selectCurrentUser, selectVisibilityDropDown }) {
+    console.log(selectVisibilityDropDown);
     return (
         <div className="header">
             <Link to="/" className="logo-container">
@@ -25,7 +30,7 @@ function Header({ currentUser, hidden }) {
                     CONTACT
                 </Link>
 
-                {currentUser ? (
+                {selectCurrentUser ? (
                     <div onClick={() => auth.signOut()} className="option">
                         SIGN OUT
                     </div>
@@ -36,14 +41,14 @@ function Header({ currentUser, hidden }) {
                 )}
                 <CartIcon />
             </div>
-            {hidden ? null : <CartDropDown />}
+            {selectVisibilityDropDown ? null : <CartDropDown />}
         </div>
     );
 }
 
 const mapStateToProps = state => ({
-    currentUser: state.users.currentUser,
-    hidden: state.cart.hidden,
+    selectCurrentUser: selectCurrentUser(state),
+    selectVisibilityDropDown: selectVisibilityDropDown(state),
 });
 
 export default connect(mapStateToProps)(Header);

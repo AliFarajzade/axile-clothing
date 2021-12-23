@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 
@@ -8,6 +8,7 @@ import { auth, createUserProfileDocument } from './firebase/firebase.utilities';
 import HomePage from './pages/home/hompage';
 import ShopPage from './pages/shop/shoppage';
 import SignInUp from './pages/sign-in-up/sign-in-up';
+import CheckoutPage from './pages/checkout/checkoutpage';
 
 import Header from './components/header/header.component';
 
@@ -50,14 +51,15 @@ class App extends React.Component {
 
     render() {
         return (
-            <BrowserRouter>
+            <>
                 <Header />
                 <Routes>
                     <Route path="/" element={<HomePage />} />
                     <Route path="/shop" element={<ShopPage />} />
                     <Route path="/sign" element={<SignInUp />} />
+                    <Route path="/checkout" element={<CheckoutPage />} />
                 </Routes>
-            </BrowserRouter>
+            </>
         );
     }
 }

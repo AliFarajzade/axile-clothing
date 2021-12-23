@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 
 function ShopCartItem({ imageUrl, name, quantity, price }) {
     return (
@@ -8,7 +7,7 @@ function ShopCartItem({ imageUrl, name, quantity, price }) {
             <div className="item-details">
                 <span className="name">{name}</span>
                 <span className="price">
-                    {quantity} x ${price}
+                    {quantity} &#9747; ${price}
                 </span>
             </div>
         </div>
