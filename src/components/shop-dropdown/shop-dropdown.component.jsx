@@ -1,7 +1,6 @@
 import React from 'react';
 
-// import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import ShopCartItem from '../shop-cart-item/shop-cart-item.component';
 
@@ -12,6 +11,7 @@ import { selectCartItems } from '../../redux/cart/cart.selectors';
 import { toggleCartHidden } from '../../redux/cart/cart.actions';
 
 function CartDropDown({ shoppingCartItems, toggleCartHidden }) {
+    const navigate = useNavigate();
     return (
         <div className="cart-dropdown">
             <div className="cart-items">
@@ -30,11 +30,15 @@ function CartDropDown({ shoppingCartItems, toggleCartHidden }) {
                     </span>
                 )}
             </div>
-            <Link to="/checkout">
-                <CustomButton onClick={() => toggleCartHidden()}>
-                    GO TO CHECKOUT
-                </CustomButton>
-            </Link>
+
+            <CustomButton
+                onClick={() => {
+                    toggleCartHidden();
+                    navigate('/checkout');
+                }}
+            >
+                GO TO CHECKOUT
+            </CustomButton>
         </div>
     );
 }
