@@ -4,18 +4,34 @@ import { connect } from 'react-redux';
 
 import { useParams } from 'react-router-dom';
 
-import { selectShopCollection } from '../../redux/shop/shop.selectors';
+import { selectShopCollections } from '../../redux/shop/shop.selectors';
 
-let collectionUrlParam;
+import CollectionItem from '../../components/collection-item/collection-item.component';
 
-function CollectionPage({ selectShopCollection }) {
+function CollectionPage({ selectShopCollections }) {
     const { collectionid } = useParams();
-    collectionUrlParam = collectionid;
-    return <div className="category">Category Page</div>;
+
+    const routeItem = selectShopCollections.find(
+        itemObj => itemObj.routeName === collectionid
+    );
+
+    console.log(routeItem);
+    if (routeItem) {
+        return (
+            <div className="collection-page">
+                <h2 className="title">{routeItem.title}</h2>
+                <div className="items">
+                    {routeItem.items.map(itemObj => (
+                        <CollectionItem key={itemObj.id} item={itemObj} />
+                    ))}
+                </div>
+            </div>
+        );
+    }
 }
 
 const mapStateToProps = state => ({
-    selectShopCollection: selectShopCollection(collectionUrlParam)(state),
+    selectShopCollections: selectShopCollections(state),
 });
 
 export default connect(mapStateToProps)(CollectionPage);
