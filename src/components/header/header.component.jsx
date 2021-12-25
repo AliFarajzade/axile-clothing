@@ -16,7 +16,6 @@ import CartIcon from '../shop-icon/shop-icon.component';
 // import Loader from '../loader/loader.component';
 
 function Header({ selectCurrentUser, selectVisibilityDropDown }) {
-    console.log(selectVisibilityDropDown);
     return (
         <div className="header">
             <Link to="/" className="logo-container">

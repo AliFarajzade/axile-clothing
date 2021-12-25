@@ -5,7 +5,6 @@ import { selecetDirectoryData } from '../../redux/directory/directory.selectors'
 import { connect } from 'react-redux';
 
 function DirectoryMenu({ selecetDirectoryData }) {
-    console.log(selecetDirectoryData);
     return (
         <div className="directory-menu">
             {selecetDirectoryData.map(
