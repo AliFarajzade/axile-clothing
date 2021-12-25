@@ -11,10 +11,11 @@ import CollectionItem from '../../components/collection-item/collection-item.com
 function CollectionPage({ selectShopCollections }) {
     const { collectionid } = useParams();
 
-    const routeItem = selectShopCollections.find(
-        itemObj => itemObj.routeName === collectionid
-    );
+    // const routeItem = selectShopCollections.find(
+    //     itemObj => itemObj.routeName === collectionid
+    // );
 
+    const routeItem = selectShopCollections[collectionid];
     console.log(routeItem);
     if (routeItem) {
         return (
