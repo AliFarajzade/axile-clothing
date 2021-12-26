@@ -8,7 +8,6 @@ const StripeButton = ({ totalPRice }) => {
         'pk_test_51KApn5DDqf8gmMCVWAY3MA4UFV1pSDRjaABxj10tCRYL7Z1hUXvNeTFoI12l98QyrGPSk0w31tYpx7LcMTTOUCfd00o1dxhCqz';
 
     const onToken = token => {
-        console.log(token);
         alert('Done!');
     };
 
@@ -28,7 +27,7 @@ const StripeButton = ({ totalPRice }) => {
             />
         );
     } catch (error) {
-        console.log('Stripe Error');
+        console.error('Stripe Error');
     }
 };
 

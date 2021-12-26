@@ -13,8 +13,6 @@ import {
 } from '../../redux/cart/cart.selectors';
 
 function CheckoutPage({ selectCartItems, selectCartTotal, removeItem }) {
-    console.log('CHECKOUT::::::::', selectCartItems, selectCartTotal);
-
     return (
         <div className="checkout-page">
             <div className="checkout-header">

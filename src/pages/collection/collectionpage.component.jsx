@@ -16,7 +16,6 @@ function CollectionPage({ selectShopCollections }) {
     // );
 
     const routeItem = selectShopCollections[collectionid];
-    console.log(routeItem);
     if (routeItem) {
         return (
             <div className="collection-page">

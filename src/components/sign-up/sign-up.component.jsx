@@ -20,10 +20,7 @@ export default class SignUp extends Component {
     }
 
     handleChange = eventParam =>
-        this.setState(
-            { [eventParam.target.name]: eventParam.target.value },
-            () => console.log(this.state)
-        );
+        this.setState({ [eventParam.target.name]: eventParam.target.value });
 
     handleSubmit = async eventParam => {
         eventParam.preventDefault();
