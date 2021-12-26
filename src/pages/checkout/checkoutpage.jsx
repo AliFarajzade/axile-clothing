@@ -5,6 +5,8 @@ import CheckoutItem from '../../components/checkout-item/checkout-item.component
 
 import { removeItem } from '../../redux/cart/cart.actions';
 
+import StripeButton from '../../components/stripe-button/stripe-button.component';
+
 import {
     selectCartItems,
     selectCartTotal,
@@ -43,6 +45,15 @@ function CheckoutPage({ selectCartItems, selectCartTotal, removeItem }) {
             <div className="total">
                 <span>TOTAL: ${selectCartTotal}</span>
             </div>
+
+            <div className="test-warning">
+                *PLEASE USE THE FOLLOWING INFORMATION TO TEST THE CREDIT CARD
+                FOT PAYMENT:
+                <br />
+                4242 4242 4242 4242 - CVV: 123
+            </div>
+
+            <StripeButton totalPRice={selectCartTotal} />
         </div>
     );
 }
