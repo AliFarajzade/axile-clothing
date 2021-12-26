@@ -3,7 +3,11 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 
-import { auth, createUserProfileDocument } from './firebase/firebase.utilities';
+import {
+    auth,
+    createUserProfileDocument,
+    createCollectionsAndAddDocuments,
+} from './firebase/firebase.utilities';
 
 import HomePage from './pages/home/hompage';
 import ShopPage from './pages/shop/shoppage';
@@ -15,12 +19,16 @@ import Header from './components/header/header.component';
 import './App.scss';
 
 import { setCurrentUser } from './redux/users/users.action';
+// import { selectCollectionsForPreview } from './redux/shop/shop.selectors';
 
 class App extends React.Component {
     #googleUnsubscribeConnection;
 
-    componentDidMount() {
-        const { setCurrentUser } = this.props;
+    /* async */ componentDidMount() {
+        console.log(
+            '--------------------Component Did Mount--------------------'
+        );
+        const { setCurrentUser /* selectCollectionsForPreview */ } = this.props;
 
         this.#googleUnsubscribeConnection = auth.onAuthStateChanged(
             async userAuth => {
@@ -43,6 +51,14 @@ class App extends React.Component {
                 } else setCurrentUser(null);
             }
         );
+
+        // const dataSetResponse = await createCollectionsAndAddDocuments(
+        //     'collections',
+        //     selectCollectionsForPreview.map(({ items, title }) => ({
+        //         items,
+        //         title,
+        //     }))
+        // );
     }
 
     componentWillUnmount() {
@@ -80,6 +96,7 @@ const mapDispatchToProps = dispatchEvent => ({
 
 const mapStateToProps = state => ({
     currentUser: state.users.currentUser,
+    // selectCollectionsForPreview: selectCollectionsForPreview(state),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
