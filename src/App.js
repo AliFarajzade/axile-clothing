@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import {
     auth,
     createUserProfileDocument,
-    createCollectionsAndAddDocuments,
+    // createCollectionsAndAddDocuments,
 } from './firebase/firebase.utilities';
 
 import HomePage from './pages/home/hompage';
