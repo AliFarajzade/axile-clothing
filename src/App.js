@@ -1,13 +1,9 @@
 import React from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 
-import {
-    auth,
-    createUserProfileDocument,
-    // createCollectionsAndAddDocuments,
-} from './firebase/firebase.utilities';
+import { auth, createUserProfileDocument } from './firebase/firebase.utilities';
 
 import HomePage from './pages/home/hompage';
 import ShopPage from './pages/shop/shoppage';
@@ -19,7 +15,6 @@ import Header from './components/header/header.component';
 import './App.scss';
 
 import { setCurrentUser } from './redux/users/users.action';
-// import { selectCollectionsForPreview } from './redux/shop/shop.selectors';
 
 class App extends React.Component {
     #googleUnsubscribeConnection;
@@ -51,14 +46,6 @@ class App extends React.Component {
                 } else setCurrentUser(null);
             }
         );
-
-        // const dataSetResponse = await createCollectionsAndAddDocuments(
-        //     'collections',
-        //     selectCollectionsForPreview.map(({ items, title }) => ({
-        //         items,
-        //         title,
-        //     }))
-        // );
     }
 
     componentWillUnmount() {
@@ -73,16 +60,7 @@ class App extends React.Component {
                 <Routes>
                     <Route path="/" element={<HomePage />} />
                     <Route path="/shop/*" element={<ShopPage />} />
-                    <Route
-                        path="/sign"
-                        element={
-                            currentUser ? (
-                                <Navigate replace to="/" />
-                            ) : (
-                                <SignInUp />
-                            )
-                        }
-                    />
+                    <Route path="/sign" element={<SignInUp />} />
                     <Route path="/checkout" element={<CheckoutPage />} />
                 </Routes>
             </>

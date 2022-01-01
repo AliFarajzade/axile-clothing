@@ -22,6 +22,7 @@ provider.setCustomParameters({ prompt: 'select_account' });
 
 export const signInWithGoogle = () => auth.signInWithPopup(provider);
 
+// Adding a new new document for newly signed users.
 export const createUserProfileDocument = async (userAuth, additionalData) => {
     // Guard Clause
     if (!userAuth) return;
