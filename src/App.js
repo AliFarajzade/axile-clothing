@@ -14,15 +14,12 @@ import Header from './components/header/header.component';
 
 import './App.scss';
 
-import { setCurrentUser } from './redux/users/users.action';
+import { setCurrentUser } from './redux/users/users.actions';
 
 class App extends React.Component {
     #googleUnsubscribeConnection;
 
     /* async */ componentDidMount() {
-        console.log(
-            '--------------------Component Did Mount--------------------'
-        );
         const { setCurrentUser /* selectCollectionsForPreview */ } = this.props;
 
         this.#googleUnsubscribeConnection = auth.onAuthStateChanged(
@@ -53,7 +50,6 @@ class App extends React.Component {
     }
 
     render() {
-        const { currentUser } = this.props;
         return (
             <>
                 <Header />
