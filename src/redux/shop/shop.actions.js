@@ -19,15 +19,15 @@ export const fetchCollectionsFailure = erroeMessage => ({
     payload: erroeMessage,
 });
 
-export const fetchCollectionsStartAsync = () => dispatchEvent => {
-    const collectionRef = firestore.collection('collections');
-    dispatchEvent(fetchCollectionsStart());
-
-    collectionRef
-        .get()
-        .then(snapshot => {
-            const tranformedMap = convertCollectionsDataToMap(snapshot.docs);
-            dispatchEvent(fetchCollectionsSuccuss(tranformedMap));
-        })
-        .catch(error => dispatchEvent(fetchCollectionsFailure(error.message)));
-};
+// export const fetchCollectionsStartAsync = () => dispatchEvent => {
+//     const collectionRef = firestore.collection('collections');
+//     dispatchEvent(fetchCollectionsStart());
+//
+//     collectionRef
+//         .get()
+//         .then(snapshot => {
+//             const tranformedMap = convertCollectionsDataToMap(snapshot.docs);
+//             dispatchEvent(fetchCollectionsSuccuss(tranformedMap));
+//         })
+//         .catch(error => dispatchEvent(fetchCollectionsFailure(error.message)));
+// };
