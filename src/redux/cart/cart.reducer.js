@@ -38,6 +38,11 @@ const cartReducer = (currentState = INITIAL_STATE, action) => {
                     action.payload
                 ),
             };
+        case cartActionTypes.CLEAR_CART:
+            return {
+                ...currentState,
+                shoppingCartItems: [],
+            };
         default:
             return currentState;
     }
