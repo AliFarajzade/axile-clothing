@@ -11,6 +11,8 @@ import {
     selectUserLoadingStatus,
 } from '../../redux/users/users.selectors';
 
+import { signOutStart } from '../../redux/users/users.actions';
+
 import CartDropDown from '../shop-dropdown/shop-dropdown.component';
 import CartIcon from '../shop-icon/shop-icon.component';
 
@@ -28,6 +30,7 @@ function Header({
     selectCurrentUser,
     selectVisibilityDropDown,
     selectUserLoadingStatus,
+    signOutStart,
 }) {
     return (
         <HeaderContainer>
@@ -40,7 +43,7 @@ function Header({
 
                 {
                     selectCurrentUser ? (
-                        <OptionDiv onClick={() => auth.signOut()}>
+                        <OptionDiv onClick={() => signOutStart()}>
                             SIGN OUT
                         </OptionDiv>
                     ) : selectUserLoadingStatus ? (
@@ -70,4 +73,8 @@ const mapStateToProps = state => ({
     selectUserLoadingStatus: selectUserLoadingStatus(state),
 });
 
-export default connect(mapStateToProps)(Header);
+const mapDispatchToProps = dispatchEvent => ({
+    signOutStart: () => dispatchEvent(signOutStart()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

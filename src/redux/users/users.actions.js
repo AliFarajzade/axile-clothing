@@ -1,32 +1,46 @@
-import userActionTypes from './users.types';
+import usersActionTypes from './users.types';
 
 export const signInSuccuss = userAuth => ({
-    type: userActionTypes.SIGNIN_SUCCUSS,
+    type: usersActionTypes.SIGNIN_SUCCUSS,
     payload: userAuth,
 });
 
 export const signInFailure = error => ({
-    type: userActionTypes.SIGNIN_FAILURE,
+    type: usersActionTypes.SIGNIN_FAILURE,
     payload: error,
 });
 
 export const signInLoading = () => ({
-    type: userActionTypes.SIGNIN_LOADING,
+    type: usersActionTypes.SIGNIN_LOADING,
 });
 
 // Google sign in actions
 export const googleSignInStart = () => ({
-    type: userActionTypes.GOOGLE_SIGNIN_START,
+    type: usersActionTypes.GOOGLE_SIGNIN_START,
 });
 
 // Email sign in actions
 export const emailSignInStart = (email, password) => ({
-    type: userActionTypes.EMAIL_SIGNIN_START,
+    type: usersActionTypes.EMAIL_SIGNIN_START,
     payload: { email, password },
+});
+
+// Sign out
+export const signOutStart = () => ({
+    type: usersActionTypes.SIGNOUT_START,
+});
+
+export const signOutSuccess = () => ({
+    type: usersActionTypes.SIGNOUT_SUCCESS,
+});
+
+export const signOutFailure = error => ({
+    type: usersActionTypes.SIGNOUT_FAILURE,
+    payload: error,
 });
 
 // Checking for persistence
 // User
 export const checkUserSession = () => ({
-    type: userActionTypes.CHECK_USER_SESSION,
+    type: usersActionTypes.CHECK_USER_SESSION,
 });

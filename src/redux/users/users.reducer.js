@@ -21,10 +21,20 @@ const userReducer = (currentState = INITIAL_STATE, action) => {
                 isLoading: false,
             };
 
+        case usersActionTypes.SIGNOUT_FAILURE:
         case usersActionTypes.SIGNIN_FAILURE:
             return {
                 ...currentState,
+                isLoading: false,
                 error: action.payload,
+            };
+
+        case usersActionTypes.SIGNOUT_SUCCESS:
+            return {
+                ...currentState,
+                currentUser: null,
+                isLoading: false,
+                error: null,
             };
 
         default:
