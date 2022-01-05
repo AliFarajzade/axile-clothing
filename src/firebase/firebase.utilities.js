@@ -17,10 +17,10 @@ export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 
 // Setting up the pop-up
-const provider = new firebase.auth.GoogleAuthProvider();
-provider.setCustomParameters({ prompt: 'select_account' });
+export const googleProvider = new firebase.auth.GoogleAuthProvider();
+googleProvider.setCustomParameters({ prompt: 'select_account' });
 
-export const signInWithGoogle = () => auth.signInWithPopup(provider);
+export const signInWithGoogle = () => auth.signInWithPopup(googleProvider);
 
 // Adding a new new document for newly signed users.
 export const createUserProfileDocument = async (userAuth, additionalData) => {
@@ -29,7 +29,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 
     const userRef = firestore.doc(`users/${userAuth.uid}`);
     const snapshop = await userRef.get();
-
+    console.log(additionalData);
     if (!snapshop.exists) {
         const { displayName, email } = userAuth;
         const createdAt = new Date();

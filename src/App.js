@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 
-import { auth, createUserProfileDocument } from './firebase/firebase.utilities';
+// import { auth, createUserProfileDocument } from './firebase/firebase.utilities';
 
 import HomePage from './pages/home/hompage';
 import ShopPage from './pages/shop/shoppage';
@@ -20,29 +20,32 @@ class App extends React.Component {
     #googleUnsubscribeConnection;
 
     /* async */ componentDidMount() {
-        const { setCurrentUser /* selectCollectionsForPreview */ } = this.props;
+        const {
+            setCurrentUser,
+            googleSignInStart /* selectCollectionsForPreview */,
+        } = this.props;
 
-        this.#googleUnsubscribeConnection = auth.onAuthStateChanged(
-            async userAuth => {
-                if (userAuth) {
-                    setCurrentUser(userAuth);
-                    const userRef = await createUserProfileDocument(userAuth);
+        // this.#googleUnsubscribeConnection = auth.onAuthStateChanged(
+        //     async userAuth => {
+        //         if (userAuth) {
+        //             setCurrentUser(userAuth);
+        //             const userRef = await createUserProfileDocument(userAuth);
 
-                    userRef.onSnapshot(snapshot => {
-                        const { displayName, email, createdAt } =
-                            snapshot.data();
-                        const { id } = snapshot;
+        //             userRef.onSnapshot(snapshot => {
+        //                 const { id } = snapshot;
+        //                 const { displayName, email, createdAt } =
+        //                     snapshot.data();
 
-                        setCurrentUser({
-                            id,
-                            displayName,
-                            email,
-                            createdAt,
-                        });
-                    });
-                } else setCurrentUser(null);
-            }
-        );
+        //                 setCurrentUser({
+        //                     id,
+        //                     displayName,
+        //                     email,
+        //                     createdAt,
+        //                 });
+        //             });
+        //         } else setCurrentUser(null);
+        //     }
+        // );
     }
 
     componentWillUnmount() {

@@ -1,9 +1,15 @@
 import React, { Component } from 'react';
+
 import FormGroup from '../form-group/form-group.component';
 import CustomButton from '../custom-button/custom-button.component';
-import { signInWithGoogle, auth } from '../../firebase/firebase.utilities';
 
-export default class SignIn extends Component {
+import { auth } from '../../firebase/firebase.utilities';
+
+import { googleSignInStart } from '../../redux/users/users.actions';
+
+import { connect } from 'react-redux';
+
+class SignIn extends Component {
     constructor(props) {
         super(props);
 
@@ -37,6 +43,8 @@ export default class SignIn extends Component {
     };
 
     render() {
+        const { googleSignInStart } = this.props;
+        console.log(googleSignInStart);
         return (
             <div className="sign-in">
                 <h2>I already have an account</h2>
@@ -67,7 +75,7 @@ export default class SignIn extends Component {
                         type="button"
                         onClick={() => {
                             try {
-                                signInWithGoogle();
+                                googleSignInStart();
                             } catch (error) {
                                 console.error(
                                     'Error while signing in with google or email.',
@@ -83,3 +91,9 @@ export default class SignIn extends Component {
         );
     }
 }
+
+const mapDispatchToProps = dispatchEvent => ({
+    googleSignInStart: () => dispatchEvent(googleSignInStart()),
+});
+
+export default connect(null, mapDispatchToProps)(SignIn);
