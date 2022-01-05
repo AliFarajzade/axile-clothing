@@ -14,39 +14,10 @@ import Header from './components/header/header.component';
 
 import './App.scss';
 
-import { setCurrentUser } from './redux/users/users.actions';
-
 class App extends React.Component {
     #googleUnsubscribeConnection;
 
-    /* async */ componentDidMount() {
-        const {
-            setCurrentUser,
-            googleSignInStart /* selectCollectionsForPreview */,
-        } = this.props;
-
-        // this.#googleUnsubscribeConnection = auth.onAuthStateChanged(
-        //     async userAuth => {
-        //         if (userAuth) {
-        //             setCurrentUser(userAuth);
-        //             const userRef = await createUserProfileDocument(userAuth);
-
-        //             userRef.onSnapshot(snapshot => {
-        //                 const { id } = snapshot;
-        //                 const { displayName, email, createdAt } =
-        //                     snapshot.data();
-
-        //                 setCurrentUser({
-        //                     id,
-        //                     displayName,
-        //                     email,
-        //                     createdAt,
-        //                 });
-        //             });
-        //         } else setCurrentUser(null);
-        //     }
-        // );
-    }
+    /* async */ componentDidMount() {}
 
     componentWillUnmount() {
         this.#googleUnsubscribeConnection();
@@ -67,13 +38,8 @@ class App extends React.Component {
     }
 }
 
-const mapDispatchToProps = dispatchEvent => ({
-    setCurrentUser: userAuth => dispatchEvent(setCurrentUser(userAuth)),
-});
-
 const mapStateToProps = state => ({
     currentUser: state.users.currentUser,
-    // selectCollectionsForPreview: selectCollectionsForPreview(state),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps)(App);
