@@ -13,6 +13,14 @@ const CONFIG = {
 
 firebase.initializeApp(CONFIG);
 
+export const getCurrentUser = () =>
+    new Promise((resolve, reject) => {
+        const unsubscribe = auth.onAuthStateChanged(userAuth => {
+            unsubscribe();
+            resolve(userAuth);
+        }, reject);
+    });
+
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 
@@ -29,7 +37,6 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 
     const userRef = firestore.doc(`users/${userAuth.uid}`);
     const snapshop = await userRef.get();
-    console.log(additionalData);
     if (!snapshop.exists) {
         const { displayName, email } = userAuth;
         const createdAt = new Date();

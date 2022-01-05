@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 
 // import { auth, createUserProfileDocument } from './firebase/firebase.utilities';
 
+import { checkUserSession } from './redux/users/users.actions';
+
 import HomePage from './pages/home/hompage';
 import ShopPage from './pages/shop/shoppage';
 import SignInUp from './pages/sign-in-up/sign-in-up';
@@ -15,12 +17,10 @@ import Header from './components/header/header.component';
 import './App.scss';
 
 class App extends React.Component {
-    #googleUnsubscribeConnection;
+    componentDidMount() {
+        const { checkUserSession } = this.props;
 
-    /* async */ componentDidMount() {}
-
-    componentWillUnmount() {
-        this.#googleUnsubscribeConnection();
+        checkUserSession();
     }
 
     render() {
@@ -42,4 +42,8 @@ const mapStateToProps = state => ({
     currentUser: state.users.currentUser,
 });
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = dispatchEvent => ({
+    checkUserSession: () => dispatchEvent(checkUserSession()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

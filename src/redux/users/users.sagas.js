@@ -2,21 +2,20 @@ import { takeLatest, put, all, call } from 'redux-saga/effects';
 
 import usersActionTypes from './users.types';
 
-import { signInFailure, signInSuccuss } from './users.actions';
+import { signInFailure, signInSuccuss, signInLoading } from './users.actions';
 
 import {
     auth,
     googleProvider,
     createUserProfileDocument,
+    getCurrentUser,
 } from '../../firebase/firebase.utilities';
 
 // Generic sign function
 function* getSnapshotFromUserAuth(userAuth) {
+    yield put(signInLoading());
     try {
-        const userRef = yield call(
-            createUserProfileDocument,
-            ...[userAuth, { signMethod: 'Google Sign.' }]
-        );
+        const userRef = yield call(createUserProfileDocument, userAuth);
 
         const snapshot = yield userRef.get();
 
@@ -58,6 +57,26 @@ function* onEmailSignInStart() {
     yield takeLatest(usersActionTypes.EMAIL_SIGNIN_START, signInWithEmail);
 }
 
+// Checking for user session
+function* isUserAuthenticted() {
+    try {
+        const userAuth = yield getCurrentUser();
+        if (!userAuth) return;
+        console.log(userAuth);
+        yield getSnapshotFromUserAuth(userAuth);
+    } catch (error) {
+        yield put(signInFailure(error));
+    }
+}
+
+function* onCheckUserSession() {
+    yield takeLatest(usersActionTypes.CHECK_USER_SESSION, isUserAuthenticted);
+}
+
 export default function* usersSagas() {
-    yield all([call(onGoogleSignInStart), call(onEmailSignInStart)]);
+    yield all([
+        call(onGoogleSignInStart),
+        call(onEmailSignInStart),
+        call(onCheckUserSession),
+    ]);
 }

@@ -6,3 +6,8 @@ export const selectCurrentUser = createSelector(
     [selectUser],
     users => users.currentUser
 );
+
+export const selectUserLoadingStatus = createSelector(
+    [selectUser],
+    users => users.isLoading
+);

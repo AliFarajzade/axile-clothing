@@ -10,6 +10,10 @@ export const signInFailure = error => ({
     payload: error,
 });
 
+export const signInLoading = () => ({
+    type: userActionTypes.SIGNIN_LOADING,
+});
+
 // Google sign in actions
 export const googleSignInStart = () => ({
     type: userActionTypes.GOOGLE_SIGNIN_START,
@@ -19,4 +23,10 @@ export const googleSignInStart = () => ({
 export const emailSignInStart = (email, password) => ({
     type: userActionTypes.EMAIL_SIGNIN_START,
     payload: { email, password },
+});
+
+// Checking for persistence
+// User
+export const checkUserSession = () => ({
+    type: userActionTypes.CHECK_USER_SESSION,
 });
