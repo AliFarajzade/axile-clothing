@@ -9,6 +9,7 @@ import {
     signOutSuccess,
     signInLoadingStart,
     signInLoadingStop,
+    signUpFailure,
 } from './users.actions';
 
 import {
@@ -19,9 +20,12 @@ import {
 } from '../../firebase/firebase.utilities';
 
 // Generic sign function
-function* getSnapshotFromUserAuth(userAuth) {
+function* getSnapshotFromUserAuth(userAuth, additionalData) {
     try {
-        const userRef = yield call(createUserProfileDocument, userAuth);
+        const userRef = yield call(
+            createUserProfileDocument,
+            ...[userAuth, { ...additionalData }]
+        );
 
         const snapshot = yield userRef.get();
 
@@ -63,6 +67,23 @@ function* onEmailSignInStart() {
     yield takeLatest(usersActionTypes.EMAIL_SIGNIN_START, signInWithEmail);
 }
 
+// Sign up
+function* signUp({ payload: { displayName, email, password } }) {
+    try {
+        const { user: userAuth } = yield auth.createUserWithEmailAndPassword(
+            email,
+            password
+        );
+        yield getSnapshotFromUserAuth(userAuth, { displayName });
+    } catch (error) {
+        yield put(signUpFailure(error));
+    }
+}
+
+function* onSignUpStart() {
+    yield takeLatest(usersActionTypes.SIGNUP_START, signUp);
+}
+
 // Sign out
 function* signOut() {
     try {
@@ -102,5 +123,6 @@ export default function* usersSagas() {
         call(onEmailSignInStart),
         call(onCheckUserSession),
         call(onSignOutStart),
+        call(onSignUpStart),
     ]);
 }

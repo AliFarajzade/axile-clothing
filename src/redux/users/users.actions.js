@@ -1,5 +1,6 @@
 import usersActionTypes from './users.types';
 
+// Generic sign in actions
 export const signInSuccuss = userAuth => ({
     type: usersActionTypes.SIGNIN_SUCCUSS,
     payload: userAuth,
@@ -27,6 +28,21 @@ export const googleSignInStart = () => ({
 export const emailSignInStart = (email, password) => ({
     type: usersActionTypes.EMAIL_SIGNIN_START,
     payload: { email, password },
+});
+
+// Sign up actions
+export const signUpStart = (displayName, email, password) => ({
+    type: usersActionTypes.SIGNUP_START,
+    payload: { displayName, email, password },
+});
+
+export const signUpSuccess = () => ({
+    type: usersActionTypes.SIGNUP_SUCCESS,
+});
+
+export const signUpFailure = error => ({
+    type: usersActionTypes.SIGNUP_FAILURE,
+    payload: error,
 });
 
 // Sign out

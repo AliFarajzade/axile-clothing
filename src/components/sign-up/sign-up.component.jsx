@@ -2,12 +2,10 @@ import React, { Component } from 'react';
 import FormGroup from '../form-group/form-group.component';
 import CustomButton from '../custom-button/custom-button.component';
 
-import {
-    auth,
-    createUserProfileDocument,
-} from '../../firebase/firebase.utilities';
+import { signUpStart } from '../../redux/users/users.actions';
 
-export default class SignUp extends Component {
+import { connect } from 'react-redux';
+class SignUp extends Component {
     constructor() {
         super();
 
@@ -22,34 +20,44 @@ export default class SignUp extends Component {
     handleChange = eventParam =>
         this.setState({ [eventParam.target.name]: eventParam.target.value });
 
-    handleSubmit = async eventParam => {
+    handleSubmit = eventParam => {
         eventParam.preventDefault();
 
-        const { displayName, email, password, confirmPassword } = this.state;
+        const { signUpStart } = this.props;
+
+        const { displayName, password, confirmPassword } = this.state;
+        let { email } = this.state;
+        email = email.toLocaleLowerCase();
 
         if (password !== confirmPassword) {
             alert("Passwords don't match");
-            return;
-        }
-
-        try {
-            const { user: userAuth } =
-                await auth.createUserWithEmailAndPassword(email, password);
-
-            createUserProfileDocument(userAuth, { displayName });
-
             this.setState({
-                displayName: '',
-                email: '',
                 password: '',
                 confirmPassword: '',
             });
-        } catch (error) {
-            console.error(
-                'Error while Signing up with email & password',
-                error.message
-            );
+            return;
         }
+
+        signUpStart(displayName, email, password);
+
+        // try {
+        //     const { user: userAuth } =
+        //         await auth.createUserWithEmailAndPassword(email, password);
+
+        //     createUserProfileDocument(userAuth, { displayName });
+
+        //     this.setState({
+        //         displayName: '',
+        //         email: '',
+        //         password: '',
+        //         confirmPassword: '',
+        //     });
+        // } catch (error) {
+        //     console.error(
+        //         'Error while Signing up with email & password',
+        //         error.message
+        //     );
+        // }
     };
 
     render() {
@@ -99,3 +107,10 @@ export default class SignUp extends Component {
         );
     }
 }
+
+const mapDispatchToProps = dispatchEvent => ({
+    signUpStart: (displayName, email, password) =>
+        dispatchEvent(signUpStart(displayName, email, password)),
+});
+
+export default connect(null, mapDispatchToProps)(SignUp);

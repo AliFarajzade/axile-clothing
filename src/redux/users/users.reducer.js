@@ -8,6 +8,27 @@ const INITIAL_STATE = {
 
 const userReducer = (currentState = INITIAL_STATE, action) => {
     switch (action.type) {
+        case usersActionTypes.SIGNUP_START:
+            return {
+                ...currentState,
+                isLoading: true,
+                error: null,
+            };
+
+        case usersActionTypes.SIGNUP_SUCCESS:
+            return {
+                ...currentState,
+                isLoading: false,
+                error: null,
+            };
+
+        case usersActionTypes.SIGNUP_FAILURE:
+            return {
+                ...currentState,
+                isLoading: false,
+                error: action.payload,
+            };
+
         case usersActionTypes.SIGNIN_LOADING_START:
             return {
                 ...currentState,
