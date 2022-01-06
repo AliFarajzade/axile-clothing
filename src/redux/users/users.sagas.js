@@ -7,6 +7,8 @@ import {
     signInSuccuss,
     signOutFailure,
     signOutSuccess,
+    signInLoadingStart,
+    signInLoadingStop,
 } from './users.actions';
 
 import {
@@ -78,11 +80,13 @@ function* onSignOutStart() {
 
 // Checking for user session
 function* isUserAuthenticted() {
+    yield put(signInLoadingStart());
     try {
         const userAuth = yield getCurrentUser();
-        if (!userAuth) return;
-        console.log(userAuth);
-        yield getSnapshotFromUserAuth(userAuth);
+        if (userAuth) {
+            yield getSnapshotFromUserAuth(userAuth);
+        }
+        yield put(signInLoadingStop());
     } catch (error) {
         yield put(signInFailure(error));
     }

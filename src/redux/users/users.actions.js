@@ -10,8 +10,12 @@ export const signInFailure = error => ({
     payload: error,
 });
 
-export const signInLoading = () => ({
-    type: usersActionTypes.SIGNIN_LOADING,
+export const signInLoadingStart = () => ({
+    type: usersActionTypes.SIGNIN_LOADING_START,
+});
+
+export const signInLoadingStop = () => ({
+    type: usersActionTypes.SIGNIN_LOADING_STOP,
 });
 
 // Google sign in actions

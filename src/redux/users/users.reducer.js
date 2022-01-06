@@ -8,10 +8,16 @@ const INITIAL_STATE = {
 
 const userReducer = (currentState = INITIAL_STATE, action) => {
     switch (action.type) {
-        case usersActionTypes.SIGNIN_LOADING:
+        case usersActionTypes.SIGNIN_LOADING_START:
             return {
                 ...currentState,
                 isLoading: true,
+            };
+
+        case usersActionTypes.SIGNIN_LOADING_STOP:
+            return {
+                ...currentState,
+                isLoading: false,
             };
 
         case usersActionTypes.GOOGLE_SIGNIN_START:
