@@ -5,7 +5,6 @@ import usersActionTypes from './users.types';
 import {
     signInFailure,
     signInSuccuss,
-    signInLoading,
     signOutFailure,
     signOutSuccess,
 } from './users.actions';
@@ -19,7 +18,6 @@ import {
 
 // Generic sign function
 function* getSnapshotFromUserAuth(userAuth) {
-    yield put(signInLoading());
     try {
         const userRef = yield call(createUserProfileDocument, userAuth);
 
@@ -65,7 +63,6 @@ function* onEmailSignInStart() {
 
 // Sign out
 function* signOut() {
-    yield put(signInLoading());
     try {
         yield auth.signOut();
 

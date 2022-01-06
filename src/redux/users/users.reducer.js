@@ -13,6 +13,15 @@ const userReducer = (currentState = INITIAL_STATE, action) => {
                 ...currentState,
                 isLoading: true,
             };
+
+        case usersActionTypes.GOOGLE_SIGNIN_START:
+        case usersActionTypes.EMAIL_SIGNIN_START:
+            return {
+                ...currentState,
+                error: null,
+                isLoading: true,
+            };
+
         case usersActionTypes.SIGNIN_SUCCUSS:
             return {
                 ...currentState,
