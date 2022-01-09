@@ -1,0 +1,18 @@
+.not-found {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30vh;
+
+    > h1 {
+        display: block;
+        font-size: 3rem;
+    }
+
+    .return-home {
+        display: block;
+
+        font-size: 2rem;
+        color: teal;
+    }
+}

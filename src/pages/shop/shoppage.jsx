@@ -2,8 +2,6 @@ import React from 'react';
 
 import { Route, Routes } from 'react-router-dom';
 
-// import { fetchCollectionsStart } from '../../redux/shop/shop.sagas';
-
 import { fetchCollectionsStart } from '../../redux/shop/shop.actions';
 
 import CollcetionPageContainer from '../collection/collectionpage.container';

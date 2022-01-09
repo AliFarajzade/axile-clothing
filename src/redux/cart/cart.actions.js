@@ -4,6 +4,10 @@ export const toggleCartHidden = () => ({
     type: cartActionTypes.TOGGLE_DROPDOWN_VISIBLITY,
 });
 
+export const hideCart = () => ({
+    type: cartActionTypes.HIDE_CART,
+});
+
 export const addItem = item => ({
     type: cartActionTypes.ADD_ITEM,
     payload: item,

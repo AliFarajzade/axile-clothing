@@ -20,8 +20,8 @@ const mapDispatchToProps = dispatchEvent => ({
     toggleCartHidden: () => dispatchEvent(toggleCartHidden()),
 });
 
-const mapStateToProps = state => ({
-    selectCartItemsCount: selectCartItemsCount(state),
-});
+const mapStateToProps = state => {
+    return { selectCartItemsCount: selectCartItemsCount(state) };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(CartIcon);

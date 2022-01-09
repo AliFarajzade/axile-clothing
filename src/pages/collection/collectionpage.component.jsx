@@ -6,14 +6,12 @@ import { useParams } from 'react-router-dom';
 
 import { selectShopCollections } from '../../redux/shop/shop.selectors';
 
+import NotFound from '../not-found/not-found.page';
+
 import CollectionItem from '../../components/collection-item/collection-item.component';
 
 function CollectionPage({ selectShopCollections }) {
     const { collectionid } = useParams();
-
-    // const routeItem = selectShopCollections.find(
-    //     itemObj => itemObj.routeName === collectionid
-    // );
 
     const routeItem = selectShopCollections[collectionid];
     if (routeItem) {
@@ -28,6 +26,8 @@ function CollectionPage({ selectShopCollections }) {
             </div>
         );
     }
+
+    return <NotFound />;
 }
 
 const mapStateToProps = state => ({

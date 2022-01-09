@@ -3,8 +3,6 @@ import { Routes, Route } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 
-// import { auth, createUserProfileDocument } from './firebase/firebase.utilities';
-
 import { checkUserSession } from './redux/users/users.actions';
 
 import HomePage from './pages/home/hompage';
@@ -15,6 +13,8 @@ import CheckoutPage from './pages/checkout/checkoutpage';
 import Header from './components/header/header.component';
 
 import './App.scss';
+
+import NotFound from './pages/not-found/not-found.page';
 
 class App extends React.Component {
     componentDidMount() {
@@ -32,6 +32,7 @@ class App extends React.Component {
                     <Route path="/shop/*" element={<ShopPage />} />
                     <Route path="/sign" element={<SignInUp />} />
                     <Route path="/checkout" element={<CheckoutPage />} />
+                    <Route path="*" element={<NotFound />} />
                 </Routes>
             </>
         );

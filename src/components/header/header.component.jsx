@@ -3,7 +3,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { ReactComponent as Logo } from '../../assets/Logo.svg';
-import { auth } from '../../firebase/firebase.utilities';
 
 import { selectVisibilityDropDown } from '../../redux/cart/cart.selectors';
 import {
