@@ -1,25 +1,30 @@
 import React from 'react';
 
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { useParams } from 'react-router-dom';
 
-import { selectShopCollections } from '../../redux/shop/shop.selectors';
+import { selectShopCollectionByRouteName } from '../../redux/shop/shop.selectors';
 
 import NotFound from '../not-found/not-found.page';
 
 import CollectionItem from '../../components/collection-item/collection-item.component';
 
-function CollectionPage({ selectShopCollections }) {
+function CollectionPage() {
     const { collectionid } = useParams();
 
-    const routeItem = selectShopCollections[collectionid];
-    if (routeItem) {
+    const selectShopCollectionByRouteNameData = useSelector(
+        selectShopCollectionByRouteName(collectionid)
+    );
+
+    if (selectShopCollectionByRouteNameData) {
         return (
             <div className="collection-page">
-                <h2 className="title">{routeItem.title}</h2>
+                <h2 className="title">
+                    {selectShopCollectionByRouteNameData.title}
+                </h2>
                 <div className="items">
-                    {routeItem.items.map(itemObj => (
+                    {selectShopCollectionByRouteNameData.items.map(itemObj => (
                         <CollectionItem key={itemObj.id} item={itemObj} />
                     ))}
                 </div>
@@ -30,8 +35,4 @@ function CollectionPage({ selectShopCollections }) {
     return <NotFound />;
 }
 
-const mapStateToProps = state => ({
-    selectShopCollections: selectShopCollections(state),
-});
-
-export default connect(mapStateToProps)(CollectionPage);
+export default CollectionPage;

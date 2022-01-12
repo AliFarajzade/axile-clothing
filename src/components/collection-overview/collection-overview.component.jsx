@@ -8,8 +8,12 @@ function CollectionsOverview({ selectCollectionsForPreview }) {
     return (
         <div>
             {selectCollectionsForPreview.map(
-                ({ id, ...otherShopDataProperties }) => (
-                    <CollectionPreview key={id} {...otherShopDataProperties} />
+                ({ id, routeName, ...otherShopDataProperties }) => (
+                    <CollectionPreview
+                        key={id}
+                        routeName={routeName}
+                        {...otherShopDataProperties}
+                    />
                 )
             )}
         </div>

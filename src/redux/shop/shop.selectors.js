@@ -31,6 +31,12 @@ export const selectCollectionLoadingStatus = createSelector(
     shop => !!shop.collections
 );
 
+export const selectShopCollectionByRouteName = routeName =>
+    createSelector(
+        [selectShopCollections],
+        collections => collections[routeName]
+    );
+
 // export const selectShopCollection = collectionUrlParam =>
 //     createSelector([selectShopCollections], collections =>
 //         collections.find(

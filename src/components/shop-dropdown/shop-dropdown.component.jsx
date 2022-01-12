@@ -2,21 +2,24 @@ import React from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
+import CustomButton from '../custom-button/custom-button.component';
 import ShopCartItem from '../shop-cart-item/shop-cart-item.component';
 
-import CustomButton from '../custom-button/custom-button.component';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { selectCartItems } from '../../redux/cart/cart.selectors';
 import { toggleCartHidden } from '../../redux/cart/cart.actions';
 
-function CartDropDown({ shoppingCartItems, toggleCartHidden }) {
+function CartDropDown() {
+    const selectCartItemsData = useSelector(selectCartItems);
+    const dispatch = useDispatch();
+
     const navigate = useNavigate();
     return (
         <div className="cart-dropdown">
             <div className="cart-items">
-                {shoppingCartItems.length ? (
-                    shoppingCartItems.map(
+                {selectCartItemsData.length ? (
+                    selectCartItemsData.map(
                         ({ id, ...otherShoppingCartItemsProperties }) => (
                             <ShopCartItem
                                 key={id}
@@ -33,7 +36,7 @@ function CartDropDown({ shoppingCartItems, toggleCartHidden }) {
 
             <CustomButton
                 onClick={() => {
-                    toggleCartHidden();
+                    dispatch(toggleCartHidden());
                     navigate('/checkout');
                 }}
             >
@@ -43,11 +46,4 @@ function CartDropDown({ shoppingCartItems, toggleCartHidden }) {
     );
 }
 
-const mapStateToProps = state => ({
-    shoppingCartItems: selectCartItems(state),
-});
-
-const mapDispatchToProps = dispatchEvent => ({
-    toggleCartHidden: () => dispatchEvent(toggleCartHidden()),
-});
-export default connect(mapStateToProps, mapDispatchToProps)(CartDropDown);
+export default CartDropDown;

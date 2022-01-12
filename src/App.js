@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { checkUserSession } from './redux/users/users.actions';
 
@@ -16,10 +16,12 @@ import './App.scss';
 
 import NotFound from './pages/not-found/not-found.page';
 
-const App = ({ checkUserSession }) => {
+const App = () => {
+    const dispatch = useDispatch();
+
     useEffect(() => {
-        checkUserSession();
-    }, [checkUserSession]);
+        dispatch(checkUserSession());
+    }, [dispatch]);
 
     return (
         <>
@@ -35,8 +37,4 @@ const App = ({ checkUserSession }) => {
     );
 };
 
-const mapDispatchToProps = dispatchEvent => ({
-    checkUserSession: () => dispatchEvent(checkUserSession()),
-});
-
-export default connect(null, mapDispatchToProps)(App);
+export default App;
