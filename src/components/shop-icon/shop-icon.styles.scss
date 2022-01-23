@@ -17,5 +17,8 @@
         font-size: 10px;
         font-weight: bold;
         bottom: 12px;
+        @media only screen and (max-width: 400px) {
+            bottom: 2px;
+        }
     }
 }

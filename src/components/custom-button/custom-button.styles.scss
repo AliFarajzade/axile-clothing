@@ -1,11 +1,13 @@
 .custom-button {
+    display: inline-block;
     user-select: none;
     min-width: 165px;
-    width: auto;
+    width: max-content;
     height: 50px;
     letter-spacing: 0.5px;
     line-height: 50px;
     padding: 0 35px 0 35px;
+    margin: 0 auto;
     font-size: 15px;
     background-color: black;
     color: white;
@@ -17,11 +19,12 @@
     border-radius: 3px;
     display: flex;
     justify-content: center;
+    margin: 3px;
 
-    &:not(:last-of-type) {
-        margin-right: 12px;
-        margin-bottom: 7px;
-    }
+    // &:not(:last-of-type) {
+    //     margin-right: 12px;
+    //     margin-bottom: 7px;
+    // }
 
     &:hover {
         background-color: white;

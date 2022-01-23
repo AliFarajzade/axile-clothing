@@ -12,9 +12,11 @@ import { toggleCartHidden } from '../../redux/cart/cart.actions';
 
 function CartDropDown() {
     const selectCartItemsData = useSelector(selectCartItems);
+
     const dispatch = useDispatch();
 
     const navigate = useNavigate();
+
     return (
         <div className="cart-dropdown">
             <div className="cart-items">

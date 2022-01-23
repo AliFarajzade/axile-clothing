@@ -14,4 +14,4 @@ function ShopCartItem({ imageUrl, name, quantity, price }) {
     );
 }
 
-export default ShopCartItem;
+export default React.memo(ShopCartItem);

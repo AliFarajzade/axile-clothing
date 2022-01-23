@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { ReactComponent as Logo } from '../../assets/Logo.svg';
 
@@ -25,12 +25,13 @@ import {
     OptionLink,
 } from './header.styles';
 
-function Header({
-    selectCurrentUser,
-    selectVisibilityDropDown,
-    selectUserLoadingStatus,
-    signOutStart,
-}) {
+function Header() {
+    const selectVisibilityDropDownData = useSelector(selectVisibilityDropDown);
+    const selectCurrentUserData = useSelector(selectCurrentUser);
+    const selectUserLoadingStatusData = useSelector(selectUserLoadingStatus);
+
+    const dispatch = useDispatch();
+
     return (
         <HeaderContainer>
             <LogoContainer to="/">
@@ -40,40 +41,20 @@ function Header({
                 <OptionLink to="/shop">SHOP</OptionLink>
                 <OptionLink to="/contact">CONTACT</OptionLink>
 
-                {
-                    selectCurrentUser ? (
-                        <OptionDiv onClick={() => signOutStart()}>
-                            SIGN OUT
-                        </OptionDiv>
-                    ) : selectUserLoadingStatus ? (
-                        <Loader />
-                    ) : (
-                        <OptionLink to="/sign">SIGN IN</OptionLink>
-                    )
-
-                    // selectCurrentUser ? (
-                    //     <OptionDiv onClick={() => auth.signOut()}>
-                    //         SIGN OUT
-                    //     </OptionDiv>
-                    // ) : (
-                    //     <OptionLink to="/sign">SIGN IN</OptionLink>
-                    // )
-                }
+                {selectCurrentUserData ? (
+                    <OptionDiv onClick={() => dispatch(signOutStart())}>
+                        SIGN OUT
+                    </OptionDiv>
+                ) : selectUserLoadingStatusData ? (
+                    <Loader />
+                ) : (
+                    <OptionLink to="/sign">SIGN IN</OptionLink>
+                )}
                 <CartIcon />
             </OptionsContainer>
-            {selectVisibilityDropDown ? null : <CartDropDown />}
+            {selectVisibilityDropDownData ? null : <CartDropDown />}
         </HeaderContainer>
     );
 }
 
-const mapStateToProps = state => ({
-    selectCurrentUser: selectCurrentUser(state),
-    selectVisibilityDropDown: selectVisibilityDropDown(state),
-    selectUserLoadingStatus: selectUserLoadingStatus(state),
-});
-
-const mapDispatchToProps = dispatchEvent => ({
-    signOutStart: () => dispatchEvent(signOutStart()),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default React.memo(Header);

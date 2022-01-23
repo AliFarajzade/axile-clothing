@@ -12,6 +12,20 @@
     z-index: 1000;
     animation: DropDown 0.2s ease-out;
 
+    @media only screen and (max-width: 400px) {
+        width: 75vw;
+        height: 300px;
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        border: 1px solid black;
+        background-color: white;
+        top: 275px;
+        right: 40px;
+        z-index: 1000;
+        animation: DropDown 0.2s ease-out;
+    }
+
     .cart-items {
         height: 240px;
         display: flex;

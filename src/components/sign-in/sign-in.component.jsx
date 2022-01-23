@@ -58,7 +58,7 @@ const SignIn = ({ emailSignInStart, googleSignInStart }) => {
 
                 <CustomButton type="submit">SIGN IN</CustomButton>
                 <CustomButton
-                    backgroundColor="dodgerblue"
+                    backgroundColor="red"
                     type="button"
                     onClick={() => {
                         try {
