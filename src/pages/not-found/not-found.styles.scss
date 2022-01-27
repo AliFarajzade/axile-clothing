@@ -3,6 +3,9 @@
     justify-content: center;
     align-items: center;
     height: 30vh;
+    display: grid;
+    grid-template-columns: auto;
+    text-align: center;
 
     > h1 {
         display: block;
@@ -11,7 +14,6 @@
 
     .return-home {
         display: block;
-
         font-size: 2rem;
         color: teal;
     }

@@ -15,6 +15,7 @@ export const HeaderContainer = styled.div`
         justify-content: space-between;
         align-items: center;
         margin-bottom: 200px;
+        padding-bottom: 100px;
     }
 `;
 
@@ -45,8 +46,11 @@ const OptionStyles = css`
     padding: 10px 15px;
     font-size: 20px;
     min-width: max-content;
-
     cursor: pointer;
+
+    @media (max-width: 400px) {
+        margin: 5px 0;
+    }
 `;
 export const OptionDiv = styled.div`
     ${OptionStyles};

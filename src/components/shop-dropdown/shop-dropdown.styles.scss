@@ -4,6 +4,7 @@
     height: 340px;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     padding: 20px;
     border: 1px solid black;
     background-color: white;
@@ -41,6 +42,8 @@
 
     button {
         margin-top: auto !important;
+        display: inline-block;
+        margin: 0 auto;
     }
 }
 

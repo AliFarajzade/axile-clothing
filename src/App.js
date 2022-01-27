@@ -7,6 +7,8 @@ import { checkUserSession } from './redux/users/users.actions';
 
 import Header from './components/header/header.component';
 
+import Footer from './components/footer/footer.component';
+
 import Spinner from './components/spinner/spinner.component';
 
 import ErrorBoundry from './components/error-boundry/error-boundry.component';
@@ -67,6 +69,7 @@ const App = () => {
                     <Route path="*" element={<NotFound />} />
                 </Routes>
             </ErrorBoundry>
+            <Footer />
         </>
     );
 };
