@@ -27,7 +27,7 @@ const StripeButton = ({ totalPRice }) => {
             />
         );
     } catch (error) {
-        console.error('Stripe Error');
+        console.error('Stripe Error.');
     }
 };
 
